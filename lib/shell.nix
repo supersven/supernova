@@ -10,7 +10,6 @@ in
       name = "ghc-shell-for-supernova";
       packages = p: [drv];
       buildInputs = with hp; [
-        brittany
         cabal-install
         hlint
       ];
