@@ -6,6 +6,7 @@ module Pulsar.Internal.Core where
 import           Control.Concurrent.Async       ( cancel )
 import           Control.Concurrent.MVar
 import qualified Control.Logging               as L
+import           Control.Monad
 import           Control.Monad.Catch            ( MonadThrow
                                                 , finally
                                                 , throwM

@@ -12,10 +12,8 @@ import           Data.Foldable                  ( traverse_ )
 import           Data.Text                      ( Text )
 import           GHC.Generics                   ( Generic )
 import           Pulsar
-import           Streamly                       ( asyncly
-                                                , maxThreads
-                                                )
-import qualified Streamly.Prelude              as S
+
+import qualified Streamly.Prelude  as S
 
 main :: IO ()
 main = demo
@@ -75,4 +73,4 @@ streamProgram :: Consumer IO -> Producer IO -> IO ()
 streamProgram (Consumer fetch ack) (Producer send) =
   let c = forever $ fetch >>= \(Message i m) -> msgDecoder m >> ack i
       p = forever $ sleep 5 >> traverse_ send messages
-  in  S.drain . asyncly . maxThreads 10 $ S.yieldM c <> S.yieldM p
+  in  S.drain $ S.async (S.yieldM c) (S.yieldM p)
