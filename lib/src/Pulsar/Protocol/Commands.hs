@@ -23,8 +23,8 @@ connect = defMessage
     & F.protocolVersion .~ 15
 
 subType :: SubType -> CommandSubscribe'SubType
-subType Exclusive = CommandSubscribe'Exclusive
-subType Shared    = CommandSubscribe'Shared
+subType Pulsar.Types.Exclusive = CommandSubscribe'Exclusive
+subType Pulsar.Types.Shared    = CommandSubscribe'Shared
 subType Failover  = CommandSubscribe'Failover
 subType KeyShared = CommandSubscribe'Key_Shared
 
